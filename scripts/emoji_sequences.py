@@ -22,9 +22,10 @@ def main():
 
     if response.ok:
         emoji_char_classes = regex_char_patterns(response.text, emoji_char_class_pattern)
-        emoji_multi_chars = regex_char_patterns(response.text, emoji_multi_char_pattern)
+        emoji_multi_chars = [f'"{pattern}"'
+            for pattern in regex_char_patterns(response.text, emoji_multi_char_pattern)]
 
-        print(f"emoji = (?:[{''.join(emoji_char_classes)}])|{'|'.join(emoji_multi_chars)};")
+        print(f"emoji = [{''.join(emoji_char_classes)}]|{'|'.join(emoji_multi_chars)};")
 
 if __name__ == "__main__":
     main()
